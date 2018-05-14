@@ -30,7 +30,8 @@ def do(args):
 
     # Build payload for chunk
     for i, chunk in enumerate(chunks, 1):
-        file = Path(f'{snapshot_name}-chunk-{i}.json')
+        name = f'{snapshot_name}-{prefix or ""}'
+        file = Path(f'{name}-chunk-{i}.json')
         payload = {}
 
         payload['indices'] = ','.join(chunk)

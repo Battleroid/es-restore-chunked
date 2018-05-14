@@ -21,12 +21,12 @@ def do(args):
     partial = data['state'] != 'SUCCESS'
     renaming = args.renaming
 
+    if prefix:
+        indices = list(filter(lambda i: i.startswith(prefix), indices))
+
     # Get days chunked
     days = {}
     for index in indices:
-        if prefix:
-            if not index.startswith(prefix):
-                continue
 
         # Extract date, use this to build list
         match = re.search(r'\d{4}\.\d{2}\.\d{2}', index)
@@ -37,7 +37,8 @@ def do(args):
     # Build payloads with the indices chunked by day
     for day, indices in days.items():
         day_str = day.strftime('%Y.%m.%d')
-        file = Path(f'{snapshot_name}-{day_str}.json')
+        name = f'{snapshot_name}-{prefix or ""}'
+        file = Path(f'{name}-{day_str}.json')
         payload = {}
 
         # payload['indices'] = ','.join(indices)
