@@ -42,7 +42,7 @@ def do(args):
         payload = {}
 
         # payload['indices'] = ','.join(indices)
-        payload['indices'] = f'{prefix}-{day_str}*'
+        payload['indices'] = f'{prefix}{day_str}*'
         payload['ignore_unavailable'] = True
         payload['include_global_state'] = False
         payload['partial'] = partial
